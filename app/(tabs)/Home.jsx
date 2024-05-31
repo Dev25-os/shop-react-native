@@ -3,6 +3,7 @@ import React from 'react'
 import { Fonts } from "../../constants/Fonts"
 import Header from '../../components/Home/Header'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import Slider from '../../components/Home/Slider'
 export default function Home() {
   return (
     <SafeAreaView>
@@ -10,6 +11,11 @@ export default function Home() {
       {/* Header */}
       <View>
         <Header />
+      </View>
+
+      {/* Slider */}
+      <View>
+        <Slider />
       </View>
 
     </SafeAreaView>

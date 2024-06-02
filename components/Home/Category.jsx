@@ -8,10 +8,11 @@ import { collection, query, getDocs } from "firebase/firestore"
 
 import { db } from "../../config/FirebaseConfig"
 import { TouchableNativeFeedback } from 'react-native-web'
+import { useRouter } from 'expo-router'
 export default function Category() {
 
     const [data, setData] = useState([])
-
+    const router = useRouter()
     const fetchData = async () => {
         setData([])
         const q = query(collection(db, 'Category'))
@@ -25,7 +26,7 @@ export default function Category() {
     }
 
     const handleOnPress = (data) => {
-        console.log("data", data);
+        router.push("/shopList/" + data.name)
     }
 
     useEffect(() => {

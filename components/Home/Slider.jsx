@@ -21,7 +21,6 @@ export default function Slider() {
         const snapshot = await getDocs(q);
 
         snapshot.forEach(item => {
-            console.log("item", item);
             setData(prev => [...prev, item.data()])
         })
     }

@@ -1,7 +1,7 @@
-import { View, Text, Image, FlatList, ActivityIndicator } from 'react-native'
+import { View, Text, Image, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
-import { useLocalSearchParams, useNavigation } from 'expo-router'
+import { useLocalSearchParams, useNavigation, useRouter } from 'expo-router'
 import { collection, query, getDocs, where } from "firebase/firestore"
 import { db } from "../../config/FirebaseConfig"
 import { Fonts } from "../../constants/Fonts"
@@ -12,6 +12,7 @@ export default function ShopByCategory() {
     const { category } = useLocalSearchParams()
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
+    const router = useRouter()
 
     const fetchData = async () => {
         setLoading(true)
@@ -21,7 +22,8 @@ export default function ShopByCategory() {
         const snapshot = await getDocs(q);
 
         snapshot.forEach(item => {
-            setData(prev => [...prev, item.data()])
+            setData(prev => [...prev, { id: item?.id, ...item.data() }])
+            console.log("ii", item.data());
         })
         setLoading(false)
     }
@@ -49,7 +51,7 @@ export default function ShopByCategory() {
                     onRefresh={fetchData}
                     refreshing={loading}
                     renderItem={({ item }) => (
-                        <View style={{
+                        <TouchableOpacity onPress={()=>router.push('/shopDetails/' + item.id)} style={{
                             backgroundColor: '#fff', padding: 10, margin: 10, borderRadius: 5,
                             display: 'flex', flexDirection: 'row',
 
@@ -67,7 +69,7 @@ export default function ShopByCategory() {
                                 </View>
 
                             </View>
-                        </View>
+                        </TouchableOpacity>
                     )}
 
                 />

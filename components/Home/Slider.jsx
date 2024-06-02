@@ -15,6 +15,7 @@ export default function Slider() {
     const [data, setData] = useState([])
 
     const fetchData = async () => {
+        setData([])
         const q = query(collection(db, 'Slider'))
 
         const snapshot = await getDocs(q);
@@ -33,7 +34,7 @@ export default function Slider() {
 
     return (
         <View style={{ marginTop: 20, paddingHorizontal: 10 }}>
-            <Text style={{ fontSize: 20, fontFamily: Fonts.medium, color: Colors.SECONDARY }}>#Special for you </Text>
+            <Text style={{ fontSize: 20, fontFamily: Fonts.bold, color: Colors.SECONDARY }}>#Special for you </Text>
             <FlatList
                 data={data}
                 showsHorizontalScrollIndicator={false}
@@ -42,7 +43,7 @@ export default function Slider() {
                 renderItem={({ item }) => (
                     <View>
                         {/* <Text>{item.name} </Text> */}
-                        <Image source={{ uri: item.imgUrl }} style={{ width: 300, height: 160, borderRadius: 10, objectFit: 'fill',marginRight:15 }} />
+                        <Image source={{ uri: item.imgUrl }} style={{ width: 300, height: 160, borderRadius: 10, objectFit: 'fill', marginRight: 15 }} />
                     </View>
                 )}
 

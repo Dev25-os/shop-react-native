@@ -1,25 +1,31 @@
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView } from 'react-native'
 import React from 'react'
 import { Fonts } from "../../constants/Fonts"
 import Header from '../../components/Home/Header'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Slider from '../../components/Home/Slider'
 import Category from '../../components/Home/Category'
+import Shops from '../../components/Home/Shops'
+import { } from 'react-native-web'
 export default function Home() {
   return (
     <SafeAreaView>
-
-      {/* Header */}
-
-      <Header />
+      <ScrollView>
 
 
-      {/* Slider */}
+        {/* Header */}
+        <Header />
 
-      <Slider />
-      {/* Cateory */}
+        {/* Slider */}
+        <Slider />
 
-      <Category />
+        {/* Category */}
+        <Category />
+
+        {/* Shops */}
+        <Shops />
+      </ScrollView>
+
 
     </SafeAreaView>
   )

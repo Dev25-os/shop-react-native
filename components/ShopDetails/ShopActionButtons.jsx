@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Image, Linking, TouchableOpacity } from 'react-native'
+import { View, Text, FlatList, Image, Linking, TouchableOpacity, Share } from 'react-native'
 import React from 'react'
 
 export default function ShopActionButtons({ shopData }) {
@@ -25,12 +25,17 @@ export default function ShopActionButtons({ shopData }) {
             id: 4,
             name: 'Share',
             icon: require('../../assets/images/share.png'),
-            url: 'www.youtube.com'
+            url: ''
         },
     ]
 
-    const handleAction = (url) => {
-        Linking.openURL(url)
+    const handleAction = (item) => {
+        if (item.name === "Share") {
+            return Share.share({
+                message: shopData?.name + "\n Address:" + shopData?.address
+            })
+        }
+        Linking.openURL(item.url)
     }
 
     return (
@@ -40,7 +45,7 @@ export default function ShopActionButtons({ shopData }) {
                 numColumns={4}
                 columnWrapperStyle={{ justifyContent: 'space-evenly' }}
                 renderItem={({ item }) => (
-                    <TouchableOpacity activeOpacity={0.6} onPress={() => handleAction(item.url)} style={{ display: 'flex', alignItems: 'center' }}>
+                    <TouchableOpacity activeOpacity={0.6} onPress={() => handleAction(item)} style={{ display: 'flex', alignItems: 'center' }}>
                         <Image source={item.icon} style={{ width: 40, height: 40, backgroundColor: '#fff', borderRadius: 99 }} />
                         <Text style={{ textAlign: 'center', marginTop: 3 }}>{item.name} </Text>
                     </TouchableOpacity>
